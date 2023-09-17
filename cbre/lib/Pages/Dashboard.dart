@@ -45,7 +45,7 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             Container(
-                height: MediaQuery.of(context).size.height - 975,
+                height: MediaQuery.of(context).size.height - 1030,
                 child: Tile(text)),
           ],
         )),

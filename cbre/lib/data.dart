@@ -22038,3 +22038,5 @@ var data = [
     "Naïve Prediction of Days": 114
   }
 ];
+
+// var data = [];

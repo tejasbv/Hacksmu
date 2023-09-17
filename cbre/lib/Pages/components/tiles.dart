@@ -41,12 +41,12 @@ class _TileState extends State<Tile> {
       });
     } else {
       var myd = {
-        "Elevator": [0, 0, 0, 0],
-        "Plubming": [0, 0, 0, 0],
-        "Fire": [0, 0, 0, 0],
-        "HVAC": [0, 0, 0, 0],
-        "Electrical": [0, 0, 0, 0],
-        "Totals": [0, 0, 0, 0],
+        "Elevator": [10, 16, 25, 32],
+        "Plubming": [6, 97, 63, 71],
+        "Fire": [22, 17, 11, 3],
+        "HVAC": [32, 96, 63, 62],
+        "Electrical": [4, 59, 69, 48],
+        "Totals": [76, 285, 231, 855],
       };
       // data.forEach((element) {
       //   switch (element["Asset Type"]) {

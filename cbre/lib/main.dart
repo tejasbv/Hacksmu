@@ -31,10 +31,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(
-        start: 0,
-      ),
-      // home: LoginPage(),
+      // home: const HomePage(
+      //   start: 3,
+      // ),
+      home: LoginPage(),
       // home: AssetView(data[0], 0),
     );
   }

@@ -4,27 +4,46 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cbre/Pages/components/navigation.dart';
+import 'package:cbre/data.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../landingPage/home_screen.dart';
 
 class LoginPage extends StatelessWidget {
+  Future<Map<String, dynamic>> fetchData() async {
+    final response =
+        await http.get(Uri.parse("http://127.0.0.1:5000/api/data"));
+
+    if (response.statusCode == 200) {
+      var val = json.decode(response.body);
+      data = json.decode(response.body) as List<Map<String, Object>>;
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFF212332),
-      body: ListView(
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width / 16),
-        children: [
-          Menu(),
-          // MediaQuery.of(context).size.width >= 980
-          //     ? Menu()
-          //     : SizedBox(), // Responsive
-          Body()
-        ],
-      ),
-    );
+    return FutureBuilder(
+        future: fetchData(),
+        builder: (context, snapshot) {
+          return Scaffold(
+            backgroundColor: Color(0xFF212332),
+            body: ListView(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 16),
+              children: [
+                Menu(),
+                // MediaQuery.of(context).size.width >= 980
+                //     ? Menu()
+                //     : SizedBox(), // Responsive
+                Body()
+              ],
+            ),
+          );
+        });
   }
 }
 

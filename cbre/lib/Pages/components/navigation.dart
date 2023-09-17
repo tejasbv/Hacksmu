@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cbre/Pages/BudgetManagement.dart';
 import 'package:cbre/Pages/WorkOrder.dart';
 import 'package:cbre/constants.dart';
 import 'package:cbre/data.dart';
@@ -145,7 +146,9 @@ class _HomePageExampleState extends State<HomePageExample> {
                   ? AssetListView()
                   : selectedIndex == 2
                       ? WorkOrder()
-                      : Container()
+                      : selectedIndex == 3
+                          ? BudgetManagement()
+                          : Container()
         ],
       ),
     );

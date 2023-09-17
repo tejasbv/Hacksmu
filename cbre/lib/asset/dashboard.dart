@@ -129,7 +129,7 @@ class AssetView extends StatelessWidget {
                               color: thirdColor,
                             ),
                             PrimaryText(
-                              text: 'Transaction of past 6 months',
+                              text: 'Average weight',
                               size: 16,
                               color: thirdColor,
                             ),
@@ -139,8 +139,13 @@ class AssetView extends StatelessWidget {
                           height: SizeConfig.blockSizeVertical! * 5,
                         ),
                         // const HistoryTable(),
-                        if (!Responsive.isDesktop(context))
-                          PaymentsDetailList(asset)
+                        Container(
+                            width: 1500,
+                            height: 600,
+                            child: Image(
+                              image: AssetImage("Assets/history.png"),
+                              fit: BoxFit.fill,
+                            ))
                       ],
                     ),
                   ),
