@@ -8,7 +8,9 @@ import 'package:lottie/lottie.dart';
 
 class ListWidget extends StatefulWidget {
   var asset;
-  ListWidget(this.asset);
+  ListWidget(this.asset) {
+    print(asset["Asset ID"]);
+  }
 
   @override
   State<ListWidget> createState() => _ListWidgetState(asset);

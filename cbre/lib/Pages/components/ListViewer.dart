@@ -5,22 +5,26 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../constants.dart';
 import '../../data.dart';
 import 'ListWidget.dart';
 
 class ListViewer extends StatefulWidget {
-  const ListViewer({super.key});
+  var _data;
+  ListViewer(this._data);
 
   @override
-  State<ListViewer> createState() => _ListViewerState();
+  State<ListViewer> createState() => _ListViewerState(_data);
 }
 
 class _ListViewerState extends State<ListViewer> {
-  var index = 1;
+  var _data;
+  var list;
+  _ListViewerState(this._data) {
+    list = _data.map<Widget>((e) => ListWidget(e)).toList();
+  }
   var selectall = false;
-  get mainColor => null;
 
-  get secondaryColor => null;
   Widget header() {
     return Column(children: [
       Row(
@@ -119,10 +123,10 @@ class _ListViewerState extends State<ListViewer> {
           Container(
             width: 150,
             padding: EdgeInsets.only(right: 15),
-            child: AutoSizeText(
+            child: const AutoSizeText(
               "Cost",
               maxLines: 1,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white60,
                 fontSize: 36.0,
               ),
@@ -153,46 +157,34 @@ class _ListViewerState extends State<ListViewer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            header(),
-            Column(
-              children: data
-                  .sublist((index - 1) * 11, index * 11)
-                  .map((e) => ListWidget(e))
-                  .toList(),
+      child: Column(
+        children: [
+          header(),
+          Container(
+            height: MediaQuery.of(context).size.height - 500,
+            child: SingleChildScrollView(
+              child: Column(
+                children: list,
+              ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                Row(
-                  children: [
-                    ElevatedButton(onPressed: () {}, child: Text("Prev")),
-                    TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            if (index >= 2) index -= 1;
-                          });
-                        }),
-                        child: Text("Page:" + index.toString())),
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            index += 1;
-                          });
-                        },
-                        child: Text("Next")),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(),
+              Row(
+                children: [
+                  ElevatedButton(onPressed: null, child: Text("Prev")),
+                  Text(
+                    "Page: 1",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  ElevatedButton(onPressed: null, child: Text("Next")),
+                ],
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
