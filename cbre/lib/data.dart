@@ -4,6 +4,7 @@ var types = [
   "Fire Alarm",
   "HVAC",
   "Electrical Panel",
+  "Summary"
 ];
 
 var workOrders = [
@@ -15325,28 +15326,6 @@ var data = [
     "Previous Cost of Repair": 3284.4,
     "Predicted Cost of Repair": 4834.6368,
     "Naïve Prediction of Days": 183
-  },
-  {
-    "index": 694,
-    "Asset ID": 695,
-    "Asset Type": "Plumbing System",
-    "Installation Date": "9/18/2022",
-    "Manufacturer": 1,
-    "Operational Time (hrs)": 45083,
-    "Work Orders": 10,
-    "Repairs": 5,
-    "Last Serviced Date": "9/27/2022",
-    "Asset Age (days)": 630,
-    "Days Since Last Service": 597,
-    "Asset Criticality": 1,
-    "Average Daily Trips": "",
-    "Water Hardness": "Moderate",
-    "Flow Rate": 4,
-    "Battery Life": "",
-    "Sensitivity Level": "",
-    "Previous Cost of Repair": 1515,
-    "Predicted Cost of Repair": 2195.235,
-    "Naïve Prediction of Days": 14
   },
   {
     "index": 695,

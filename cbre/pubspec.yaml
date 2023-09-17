@@ -42,6 +42,8 @@ dependencies:
   reorderable_grid_view:
   lottie:
   flutter_lottie:
+  flutter_svg: ^0.22.0
+  fl_chart: ^0.35.0
 
 
 

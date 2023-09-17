@@ -191,6 +191,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../asset/dashboard.dart';
 //
 
 //
@@ -339,6 +341,8 @@ class ListWidget extends StatelessWidget {
             ),
             onTap: () {
               print("clicked");
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AssetView(asset, 2)));
             },
           ),
         ],

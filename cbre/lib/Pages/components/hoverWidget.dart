@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cbre/asset/dashboard.dart';
 import 'package:cbre/data.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -16,6 +17,7 @@ class HoveringWidget extends StatefulWidget {
 class _HoveringWidgetState extends State<HoveringWidget> {
   bool isHover = false;
   var dt;
+  DateTime today = DateTime.now();
   _HoveringWidgetState(this.dt);
 
   @override
@@ -61,9 +63,15 @@ class _HoveringWidgetState extends State<HoveringWidget> {
                         child: AutoSizeText(
                           "#" + dt["Asset ID"].toString(),
                           maxLines: 2,
-                          style: const TextStyle(
-                            color: Colors.white60,
-                            fontSize: 50.0,
+                          style: TextStyle(
+                            color: dt["Naïve Prediction of Days"] < 10
+                                ? Colors.red
+                                : dt["Naïve Prediction of Days"] < 30
+                                    ? Colors.orange
+                                    : dt["Naïve Prediction of Days"] <= 60
+                                        ? Colors.yellow
+                                        : Colors.green,
+                            fontSize: 40.0,
                           ),
                           textAlign: TextAlign.left,
                         ),
@@ -74,7 +82,10 @@ class _HoveringWidgetState extends State<HoveringWidget> {
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.only(left: 10, top: 20),
                     child: AutoSizeText(
-                      dt["Last Serviced Date"].toString(),
+                      today
+                          .add(Duration(days: dt["Naïve Prediction of Days"]))
+                          .toString()
+                          .substring(0, 11),
                       maxLines: 2,
                       style: const TextStyle(
                         color: Colors.white60,
@@ -87,7 +98,10 @@ class _HoveringWidgetState extends State<HoveringWidget> {
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.only(left: 10, top: 20),
                     child: AutoSizeText(
-                      "\$" + dt["Asset Age (days)"].toString(),
+                      "\$" +
+                          double.parse(
+                                  dt["Predicted Cost of Repair"].toString())
+                              .toStringAsFixed(2),
                       maxLines: 2,
                       style: const TextStyle(
                         color: Colors.green,
@@ -99,7 +113,10 @@ class _HoveringWidgetState extends State<HoveringWidget> {
                 ],
               )),
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AssetView(dt, 1)));
+        },
         onHover: (val) {
           setState(() {
             isHover = val;

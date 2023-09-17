@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cbre/Pages/WorkOrder.dart';
 import 'package:cbre/constants.dart';
+import 'package:cbre/data.dart';
 import 'package:flutter/material.dart';
 import 'package:side_navigation/side_navigation.dart';
 
@@ -10,25 +11,39 @@ import '../Dashboard.dart';
 /// Flutter code sample for [NavigationBar].
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final start;
+  const HomePage({this.start = 0, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePageExample());
+    return MaterialApp(home: HomePageExample(start));
   }
 }
 
 class HomePageExample extends StatefulWidget {
-  const HomePageExample({super.key});
+  final start;
+  HomePageExample(this.start, {super.key});
 
   @override
-  State<HomePageExample> createState() => _HomePageExampleState();
+  State<HomePageExample> createState() => _HomePageExampleState(start);
 }
 
 class _HomePageExampleState extends State<HomePageExample> {
-  int selectedIndex = 1;
+  int selectedIndex;
+
+  _HomePageExampleState(this.selectedIndex);
+
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    data.sort((a, b) => int.parse(a["Naïve Prediction of Days"].toString())
+        .compareTo(int.parse(b["Naïve Prediction of Days"].toString())));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

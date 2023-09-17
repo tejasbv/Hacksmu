@@ -1,8 +1,10 @@
 import 'package:cbre/Pages/Dashboard.dart';
 import 'package:cbre/Pages/components/navigation.dart';
+import 'package:cbre/data.dart';
 import 'package:cbre/loginRegister/loginPage.dart';
 import 'package:flutter/material.dart';
 
+import 'asset/dashboard.dart';
 import 'landingPage/home_screen.dart';
 
 void main() {
@@ -29,8 +31,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const HomePage(
+        start: 0,
+      ),
       // home: LoginPage(),
+      // home: AssetView(data[0], 0),
     );
   }
 }

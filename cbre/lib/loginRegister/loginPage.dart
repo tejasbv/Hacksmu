@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cbre/Pages/components/navigation.dart';
 import 'package:flutter/material.dart';
 
 import '../landingPage/home_screen.dart';
@@ -333,7 +334,10 @@ class _BodyState extends State<Body> {
                 width: double.infinity,
                 height: 50,
                 child: Center(child: Text("Sign In"))),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 151, 59, 156),
               shape: RoundedRectangleBorder(
