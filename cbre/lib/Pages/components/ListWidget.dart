@@ -196,28 +196,14 @@ import 'package:lottie/lottie.dart';
 //
 class ListWidget extends StatelessWidget {
   var isHover = false;
-  var isSelected = false;
+  var setSelect;
   var asset;
-  ListWidget(this.asset, {super.key});
+  ListWidget(this.asset, this.setSelect, {super.key});
   Widget image() {
     return Container(
       width: 100,
       height: 100,
-      child: Lottie.network(
-        asset["Asset Type"] == "Elevator"
-            ? "https://lottie.host/12746b49-4222-478c-9d07-a1af5906851c/jY5gbaC1f2.json"
-            : asset["Asset Type"] == "Plumbing System"
-                ? "https://lottie.host/8fa39020-48c2-4e04-b5c0-eaad52ad9ea5/60s3Y5oQ3D.json"
-                : asset["Asset Type"] == "Fire Alarm"
-                    ? "https://lottie.host/22cc0902-a95b-4995-a015-bb9f00692dc3/tOjwtheTXs.json"
-                    : asset["Asset Type"] == "HVAC"
-                        ? "https://lottie.host/694f68ac-9c61-41d0-a841-9b193293d760/plYxGMZkN2.json"
-                        : asset["Asset Type"] == "Electrical Panel"
-                            ? "https://lottie.host/c877ced6-7d36-49bf-8213-a1cb86cce80e/z8HS92WUQ4.json"
-                            : "https://lottie.host/8fa39020-48c2-4e04-b5c0-eaad52ad9ea5/60s3Y5oQ3D.json",
-        fit: BoxFit.fill,
-        animate: isHover,
-      ),
+      color: Colors.red,
     );
   }
 
@@ -233,8 +219,10 @@ class ListWidget extends StatelessWidget {
             child: Transform.scale(
               scale: 2,
               child: Checkbox(
-                value: isSelected,
-                onChanged: (value) {},
+                value: asset["select"] == null ? false : asset["select"],
+                onChanged: (value) {
+                  setSelect(value);
+                },
                 focusColor: Colors.white,
                 activeColor: mainColor,
                 checkColor: secondaryColor,
@@ -248,23 +236,21 @@ class ListWidget extends StatelessWidget {
             ),
           ),
           Container(
-              width: 100,
-              height: 100,
-              child: Lottie.network(
-                asset["Asset Type"] == "Elevator"
-                    ? "https://lottie.host/12746b49-4222-478c-9d07-a1af5906851c/jY5gbaC1f2.json"
-                    : asset["Asset Type"] == "Plumbing System"
-                        ? "https://lottie.host/8fa39020-48c2-4e04-b5c0-eaad52ad9ea5/60s3Y5oQ3D.json"
-                        : asset["Asset Type"] == "Fire Alarm"
-                            ? "https://lottie.host/22cc0902-a95b-4995-a015-bb9f00692dc3/tOjwtheTXs.json"
-                            : asset["Asset Type"] == "HVAC"
-                                ? "https://lottie.host/694f68ac-9c61-41d0-a841-9b193293d760/plYxGMZkN2.json"
-                                : asset["Asset Type"] == "Electrical Panel"
-                                    ? "https://lottie.host/c877ced6-7d36-49bf-8213-a1cb86cce80e/z8HS92WUQ4.json"
-                                    : "https://lottie.host/8fa39020-48c2-4e04-b5c0-eaad52ad9ea5/60s3Y5oQ3D.json",
-                fit: BoxFit.fill,
-                animate: isHover,
-              )),
+            width: 100,
+            height: 100,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100.0),
+              ),
+              color: asset["Naïve Prediction of Days"] < 10
+                  ? Colors.red
+                  : asset["Naïve Prediction of Days"] < 30
+                      ? Colors.orange
+                      : asset["Naïve Prediction of Days"] <= 60
+                          ? Colors.yellow
+                          : Colors.green,
+            ),
+          ),
           Container(
             width: 100,
             padding: EdgeInsets.only(right: 10),

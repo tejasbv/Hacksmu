@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cbre/Pages/WorkOrder.dart';
 import 'package:cbre/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:side_navigation/side_navigation.dart';
@@ -25,7 +26,7 @@ class HomePageExample extends StatefulWidget {
 }
 
 class _HomePageExampleState extends State<HomePageExample> {
-  int selectedIndex = 1;
+  int selectedIndex = 2;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
 
@@ -127,7 +128,9 @@ class _HomePageExampleState extends State<HomePageExample> {
               ? Dashboard()
               : selectedIndex == 1
                   ? AssetListView()
-                  : Container()
+                  : selectedIndex == 2
+                      ? WorkOrder()
+                      : Container()
         ],
       ),
     );

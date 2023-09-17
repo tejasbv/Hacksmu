@@ -28,21 +28,21 @@ var workOrders = [
     "Asset Type": "Elevator",
     "Last Serviced Date": "9/12/2023",
     "Asset Criticality": 1,
-    "Average Daily Trips": 5555.00,
+    "Price of Repair": 5555.00,
     "Prediction of next repair": "617"
   },
   {
     "Asset ID": 415,
     "Asset Type": "Fire Alarm",
     "Asset Criticality": 2,
-    "Date of Service": "9/10/2023",
+    "Last Serviced Date": "9/10/2023",
     "Price of Repair": 611.05,
     "Prediction of next repair": "702"
   },
   {
     "Asset ID": 188,
     "Asset Type": "Elevator",
-    "Date of Service": "9/10/2023",
+    "Last Serviced Date": "9/10/2023",
     "Asset Criticality": 3,
     "Price of Repair": 6300.00,
     "Prediction of next repair": 55

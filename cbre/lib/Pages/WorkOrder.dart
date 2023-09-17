@@ -8,17 +8,18 @@ import '../constants.dart';
 import '../data.dart';
 import 'components/ListWidget.dart';
 import 'components/Topbar.dart';
+import 'components/WorkOrderWidget.dart';
 
-class AssetListView extends StatefulWidget {
-  const AssetListView({super.key});
+class WorkOrder extends StatefulWidget {
+  const WorkOrder({super.key});
 
   @override
-  State<AssetListView> createState() => _AssetListViewState();
+  State<WorkOrder> createState() => _WorkOrderState();
 }
 
-class _AssetListViewState extends State<AssetListView> {
+class _WorkOrderState extends State<WorkOrder> {
   var index = 1;
-  var d = data.sublist((1 - 1) * 25, 1 * 25);
+  var d = workOrders;
   var typeFilter = [];
   var selectall = false;
 
@@ -26,64 +27,6 @@ class _AssetListViewState extends State<AssetListView> {
     return Column(children: [
       Row(
         children: [
-          Container(
-            width: 100,
-            height: 100,
-            child: Transform.scale(
-              scale: 2,
-              child: Checkbox(
-                value: selectall,
-                onChanged: (value) {
-                  setState(() {
-                    selectall = value!;
-                    d.forEach((e) {
-                      data[int.parse(e["index"].toString())]["select"] = value;
-                      d = [];
-                      data.forEach(
-                        (element) {
-                          if (typeFilter.length != 0 &&
-                              typeFilter.contains(element["Asset Type"]) &&
-                              d.length <= 25) {
-                            setState(() {
-                              d.add(element);
-                            });
-                          } else if (typeFilter.length == 0) {
-                            setState(() {
-                              d = data.sublist((1 - 1) * 25, 1 * 25);
-                            });
-                          }
-                        },
-                      );
-                    });
-                  });
-                },
-                focusColor: Colors.white,
-                activeColor: mainColor,
-                checkColor: secondaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-                side: MaterialStateBorderSide.resolveWith(
-                  (states) => BorderSide(width: 1.0, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            child: Center(
-              child: AutoSizeText(
-                "Image",
-                maxLines: 1,
-                style: const TextStyle(
-                  color: Colors.white60,
-                  fontSize: 36.0,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
           Container(
             width: 100,
             padding: EdgeInsets.only(right: 10),
@@ -114,7 +57,7 @@ class _AssetListViewState extends State<AssetListView> {
             width: 150,
             padding: EdgeInsets.only(right: 15),
             child: AutoSizeText(
-              "Last Service",
+              "Service Date",
               maxLines: 1,
               style: const TextStyle(
                 color: Colors.white60,
@@ -190,32 +133,8 @@ class _AssetListViewState extends State<AssetListView> {
                       height: MediaQuery.of(context).size.height - 500,
                       child: SingleChildScrollView(
                         child: Column(
-                          children: d
-                              .map<Widget>((e) => ListWidget(e, ((value) {
-                                    setState(() {
-                                      data[int.parse(e["index"].toString())]
-                                          ["select"] = value;
-                                      d = [];
-                                      data.forEach(
-                                        (element) {
-                                          if (typeFilter.length != 0 &&
-                                              typeFilter.contains(
-                                                  element["Asset Type"]) &&
-                                              d.length <= 25) {
-                                            setState(() {
-                                              d.add(element);
-                                            });
-                                          } else if (typeFilter.length == 0) {
-                                            setState(() {
-                                              d = data.sublist(
-                                                  (1 - 1) * 25, 1 * 25);
-                                            });
-                                          }
-                                        },
-                                      );
-                                    });
-                                  })))
-                              .toList(),
+                          children:
+                              d.map<Widget>((e) => WorkOrderWidget(e)).toList(),
                         ),
                       ),
                     ),
@@ -298,7 +217,7 @@ class _AssetListViewState extends State<AssetListView> {
                   typeFilter.add(s);
                   d = [];
 
-                  data.forEach(
+                  workOrders.forEach(
                     (element) {
                       if (typeFilter.length != 0 &&
                           typeFilter.contains(element["Asset Type"]) &&
@@ -308,7 +227,7 @@ class _AssetListViewState extends State<AssetListView> {
                         });
                       } else if (typeFilter.length == 0) {
                         setState(() {
-                          d = data.sublist((1 - 1) * 25, 1 * 25);
+                          d = workOrders;
                         });
                       }
                     },
@@ -316,7 +235,7 @@ class _AssetListViewState extends State<AssetListView> {
                 } else {
                   typeFilter.remove(s);
                   d = [];
-                  data.forEach(
+                  workOrders.forEach(
                     (element) {
                       if (typeFilter.length != 0 &&
                           typeFilter.contains(element["Asset Type"]) &&
@@ -326,7 +245,7 @@ class _AssetListViewState extends State<AssetListView> {
                         });
                       } else if (typeFilter.length == 0) {
                         setState(() {
-                          d = data.sublist((1 - 1) * 25, 1 * 25);
+                          d = workOrders;
                         });
                       }
                     },
