@@ -26,7 +26,7 @@ class HomePageExample extends StatefulWidget {
 }
 
 class _HomePageExampleState extends State<HomePageExample> {
-  int selectedIndex = 2;
+  int selectedIndex = 1;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
 

@@ -21,7 +21,7 @@ class _AssetListViewState extends State<AssetListView> {
   var d = data.sublist((1 - 1) * 25, 1 * 25);
   var typeFilter = [];
   var selectall = false;
-
+  var total = 0;
   Widget header() {
     return Column(children: [
       Row(
@@ -38,23 +38,31 @@ class _AssetListViewState extends State<AssetListView> {
                     selectall = value!;
                     d.forEach((e) {
                       data[int.parse(e["index"].toString())]["select"] = value;
-                      d = [];
-                      data.forEach(
-                        (element) {
-                          if (typeFilter.length != 0 &&
-                              typeFilter.contains(element["Asset Type"]) &&
-                              d.length <= 25) {
-                            setState(() {
-                              d.add(element);
-                            });
-                          } else if (typeFilter.length == 0) {
-                            setState(() {
-                              d = data.sublist((1 - 1) * 25, 1 * 25);
-                            });
-                          }
-                        },
-                      );
                     });
+                    d = [];
+                    total = 0;
+                    data.forEach(
+                      (element) {
+                        if (typeFilter.length != 0 &&
+                            typeFilter.contains(element["Asset Type"]) &&
+                            d.length <= 25) {
+                          setState(() {
+                            d.add(element);
+                          });
+                        } else if (typeFilter.length == 0) {
+                          setState(() {
+                            d = data.sublist((1 - 1) * 25, 1 * 25);
+                          });
+                        }
+                        if (element["select"] != null &&
+                            element["select"] == true) {
+                          setState(() {
+                            total += int.parse(
+                                element["Predicted Cost of Repair"].toString());
+                          });
+                        }
+                      },
+                    );
                   });
                 },
                 focusColor: Colors.white,
@@ -172,7 +180,6 @@ class _AssetListViewState extends State<AssetListView> {
 
   @override
   Widget build(BuildContext context) {
-    print(d);
     return Expanded(
         child: Column(
       children: [
@@ -196,6 +203,7 @@ class _AssetListViewState extends State<AssetListView> {
                                       data[int.parse(e["index"].toString())]
                                           ["select"] = value;
                                       d = [];
+
                                       data.forEach(
                                         (element) {
                                           if (typeFilter.length != 0 &&
@@ -283,6 +291,34 @@ class _AssetListViewState extends State<AssetListView> {
             )
           ],
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(),
+            Row(
+              children: [
+                AutoSizeText(
+                  "Total: ",
+                  maxLines: 2,
+                  style: TextStyle(
+                    color: Colors.white60,
+                    fontSize: 36.0,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                AutoSizeText(
+                  "\$" + gettotal(),
+                  maxLines: 2,
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 36.0,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            )
+          ],
+        )
       ],
     ));
   }
@@ -297,7 +333,6 @@ class _AssetListViewState extends State<AssetListView> {
                 if (value!) {
                   typeFilter.add(s);
                   d = [];
-
                   data.forEach(
                     (element) {
                       if (typeFilter.length != 0 &&
@@ -345,5 +380,15 @@ class _AssetListViewState extends State<AssetListView> {
         )
       ],
     );
+  }
+
+  String gettotal() {
+    double t = 0;
+    d.forEach((element) {
+      if (element["select"] == true) {
+        t += double.parse(element["Predicted Cost of Repair"].toString());
+      }
+    });
+    return t.toStringAsFixed(2).toString();
   }
 }

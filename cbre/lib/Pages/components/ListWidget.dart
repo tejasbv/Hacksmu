@@ -235,99 +235,111 @@ class ListWidget extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: 100,
-            height: 100,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100.0),
-              ),
-              color: asset["Naïve Prediction of Days"] < 10
-                  ? Colors.red
-                  : asset["Naïve Prediction of Days"] < 30
-                      ? Colors.orange
-                      : asset["Naïve Prediction of Days"] <= 60
-                          ? Colors.yellow
-                          : Colors.green,
+          InkWell(
+            child: Row(
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                    ),
+                    color: asset["Naïve Prediction of Days"] < 10
+                        ? Colors.red
+                        : asset["Naïve Prediction of Days"] < 30
+                            ? Colors.orange
+                            : asset["Naïve Prediction of Days"] <= 60
+                                ? Colors.yellow
+                                : Colors.green,
+                  ),
+                ),
+                Container(
+                  width: 100,
+                  padding: EdgeInsets.only(right: 10),
+                  child: AutoSizeText(
+                    asset["Asset ID"].toString(),
+                    maxLines: 1,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 36.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  width: 400,
+                  padding: EdgeInsets.only(right: 20),
+                  child: AutoSizeText(
+                    asset["Asset Type"].toString(),
+                    maxLines: 2,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 36.0,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Container(
+                  width: 150,
+                  padding: EdgeInsets.only(right: 15),
+                  child: AutoSizeText(
+                    asset["Days Since Last Service"].toString(),
+                    maxLines: 1,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 36.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  width: 150,
+                  padding: EdgeInsets.only(right: 15),
+                  child: AutoSizeText(
+                    asset["Asset Criticality"].toString(),
+                    maxLines: 1,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 36.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  width: 150,
+                  padding: EdgeInsets.only(right: 15),
+                  child: AutoSizeText(
+                    "\$" +
+                        double.parse(
+                                asset["Predicted Cost of Repair"].toString())
+                            .toStringAsFixed(2),
+                    maxLines: 1,
+                    style: const TextStyle(
+                      color: Colors.green,
+                      fontSize: 36.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  width: 150,
+                  padding: EdgeInsets.only(right: 15),
+                  child: AutoSizeText(
+                    asset["Naïve Prediction of Days"].toString(),
+                    maxLines: 1,
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 36.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
-          ),
-          Container(
-            width: 100,
-            padding: EdgeInsets.only(right: 10),
-            child: AutoSizeText(
-              asset["Asset ID"].toString(),
-              maxLines: 1,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 36.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            width: 400,
-            padding: EdgeInsets.only(right: 20),
-            child: AutoSizeText(
-              asset["Asset Type"].toString(),
-              maxLines: 2,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 36.0,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Container(
-            width: 150,
-            padding: EdgeInsets.only(right: 15),
-            child: AutoSizeText(
-              asset["Days Since Last Service"].toString(),
-              maxLines: 1,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 36.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            width: 150,
-            padding: EdgeInsets.only(right: 15),
-            child: AutoSizeText(
-              asset["Asset Criticality"].toString(),
-              maxLines: 1,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 36.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            width: 150,
-            padding: EdgeInsets.only(right: 15),
-            child: AutoSizeText(
-              asset["Predicted Cost of Repair"].toString(),
-              maxLines: 1,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 36.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Container(
-            width: 150,
-            padding: EdgeInsets.only(right: 15),
-            child: AutoSizeText(
-              asset["Naïve Prediction of Days"].toString(),
-              maxLines: 1,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 36.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            onTap: () {
+              print("clicked");
+            },
           ),
         ],
       ),
